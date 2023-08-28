@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "UW One",
+    "slug": "uwone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/logos/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/logos/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#181818"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -17,12 +17,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./src/assets/logos/adaptive.png",
+        "backgroundColor": "#181818"
+      },
+      "package": "com.uwone.mobile"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/logos/favicon.png"
     },
     "experiments": {
       "tsconfigPaths": true
