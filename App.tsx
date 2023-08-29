@@ -1,12 +1,20 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Text, View } from "react-native";
+import { MD3DarkTheme, PaperProvider } from "react-native-paper";
+import { HomeNavigator } from "@/navigators";
+import { darkThemes } from "@/themes";
+import { toNavigationTheme } from "@/utils";
 
 export default function App() {
+  const theme = { ...MD3DarkTheme, ...darkThemes.defaultTheme };
+
   return (
-    <View className="flex-1 bg-white items-center justify-center">
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={toNavigationTheme(theme)}>
+        <HomeNavigator />
+        <StatusBar style="light" />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }

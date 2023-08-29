@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/logos/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./src/assets/logos/splash.png",
       "resizeMode": "contain",
@@ -21,6 +21,10 @@
         "backgroundColor": "#181818"
       },
       "package": "com.uwone.mobile"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#181818",
+      "barStyle": "light-content"
     },
     "web": {
       "favicon": "./src/assets/logos/favicon.png"
