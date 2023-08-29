@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Appbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -21,11 +21,15 @@ export function Screen({ classNames, name, noHeader, noPadding, children }: Scre
   }
 
   return (
-    <View className="h-full w-full">
+    <ScrollView
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+      className="min-h-full w-full"
+    >
       <Appbar.Header mode="small">
         <Appbar.Content title={name} />
       </Appbar.Header>
       <View className={`${!noPadding && "px-4"} ${classNames}`}>{children}</View>
-    </View>
+    </ScrollView>
   );
 }
