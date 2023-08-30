@@ -1,10 +1,11 @@
 import dayjs from "dayjs";
-import { FetchWeatherResponse } from "@/types/services";
 
-type APIResponse = {
+type WeatherAPIResponse = {
   daily: {
     apparent_temperature_max: number[];
     apparent_temperature_min: number[];
+    sunrise: string[];
+    sunset: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
     time: string[];
@@ -42,17 +43,36 @@ type APIResponse = {
   timezone_abbreviation: string;
   utc_offset_seconds: number;
 };
+type WeatherData = {
+  hourly: {
+    precipitation: number;
+    precipitationChance: number;
+    temperature: number;
+    temperatureFeels: number;
+    time: string;
+    weatherCode: number;
+  }[];
+  today: {
+    sunrise: string;
+    sunset: string;
+    temperatureFeelsMax: number;
+    temperatureFeelsMin: number;
+    temperatureMax: number;
+    temperatureMin: number;
+    weatherCode: number;
+  };
+};
 
-export async function fetchWeather(): Promise<FetchWeatherResponse> {
+export async function fetchWeather(): Promise<WeatherData> {
   const res = await fetch(
-    "https://api.open-meteo.com/v1/forecast?latitude=43.47246&longitude=-80.54477&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=America%2FNew_York&forecast_days=3",
+    "https://api.open-meteo.com/v1/forecast?latitude=43.47246&longitude=-80.54477&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset&timezone=America%2FNew_York&forecast_days=3",
     {
       headers: {
         "User-Agent": "UWOne/0.1",
       },
     },
   );
-  const data: APIResponse = await res.json();
+  const data: WeatherAPIResponse = await res.json();
   const after = dayjs().subtract(1, "hour");
   const hourly = [];
   for (let i = 0; i < data.hourly.time.length; i++) {
@@ -71,6 +91,8 @@ export async function fetchWeather(): Promise<FetchWeatherResponse> {
   return {
     hourly,
     today: {
+      sunrise: data.daily.sunrise[0],
+      sunset: data.daily.sunset[0],
       temperatureMax: data.daily.temperature_2m_max[0],
       temperatureMin: data.daily.temperature_2m_min[0],
       temperatureFeelsMax: data.daily.apparent_temperature_max[0],
