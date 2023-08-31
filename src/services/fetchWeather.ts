@@ -80,10 +80,10 @@ export async function fetchWeather(): Promise<WeatherData> {
     if (dayjs(data.hourly.time[i]) < after) continue;
     hourly.push({
       time: data.hourly.time[i],
-      temperature: data.hourly.temperature_2m[i],
-      temperatureFeels: data.hourly.apparent_temperature[i],
-      precipitation: data.hourly.precipitation[i],
-      precipitationChance: data.hourly.precipitation_probability[i],
+      temperature: Math.round(data.hourly.temperature_2m[i]),
+      temperatureFeels: Math.round(data.hourly.apparent_temperature[i]),
+      precipitation: Math.round(data.hourly.precipitation[i]),
+      precipitationChance: Math.round(data.hourly.precipitation_probability[i]),
       weatherCode: data.hourly.weathercode[i],
     });
   }
@@ -93,10 +93,10 @@ export async function fetchWeather(): Promise<WeatherData> {
     today: {
       sunrise: data.daily.sunrise[0],
       sunset: data.daily.sunset[0],
-      temperatureMax: data.daily.temperature_2m_max[0],
-      temperatureMin: data.daily.temperature_2m_min[0],
-      temperatureFeelsMax: data.daily.apparent_temperature_max[0],
-      temperatureFeelsMin: data.daily.apparent_temperature_min[0],
+      temperatureMax: Math.round(data.daily.temperature_2m_max[0]),
+      temperatureMin: Math.round(data.daily.temperature_2m_min[0]),
+      temperatureFeelsMax: Math.round(data.daily.apparent_temperature_max[0]),
+      temperatureFeelsMin: Math.round(data.daily.apparent_temperature_min[0]),
       weatherCode: data.daily.weathercode[0],
     },
   };
