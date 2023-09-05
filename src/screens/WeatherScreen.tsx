@@ -144,7 +144,7 @@ export function WeatherScreen() {
           Last updated at {dayjs(dataUpdatedAt).format("h:mm a")} · Open-Meteo API
         </Text>
 
-        <Surface className="flex items-center p-2 rounded-xl">
+        <Surface className="flex items-center p-2 rounded-lg">
           <Text className="mb-2">Currently</Text>
           <View className="relative">
             <Text variant="displayLarge">{nowData.temperature}</Text>
@@ -186,7 +186,7 @@ export function WeatherScreen() {
         >
           {data.hourly.map((hourData, index) => (
             <View
-              className="w-[95px] flex items-center border rounded-xl py-2"
+              className="w-[95px] flex items-center border rounded-lg py-2"
               style={{ borderColor: theme.colors.outline }}
               key={index}
             >
